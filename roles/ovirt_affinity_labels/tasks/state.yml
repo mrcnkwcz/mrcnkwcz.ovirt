@@ -1,0 +1,29 @@
+---
+- name: Affinity labels | Set affinity label state
+  ovirt.ovirt.ovirt_affinity_label:
+    auth: "{{ ovirt_auth | mandatory(msg='Authentication required') }}"
+    name: "{{ ovirt_affinity_label.name | mandatory(msg='Affinity label name required') }}"
+    cluster: "{{ ovirt_affinity_label.cluster | mandatory(msg='Cluster name required') }}"
+    hosts: "{{ ovirt_affinity_label.hosts | default(omit) }}"
+    vms: "{{ ovirt_affinity_label.vms | default(omit) }}"
+    state: "{{ ovirt_affinity_label.state | default('present') }}"
+    wait: "{{ ovirt_affinity_labels_wait }}"
+    timeout: "{{ ovirt_affinity_labels_timeout }}"
+    poll_interval: "{{ ovirt_affinity_labels_poll_interval }}"
+  loop: "{{ ovirt_affinity_labels }}"
+  loop_control:
+    loop_var: ovirt_affinity_label
+    label: "{{ ovirt_affinity_label.name }}"
+  async: "{{ ovirt_affinity_labels_timeout }}"
+  poll: 0
+  register: ovirt_affinity_labels_statuses
+
+- name: Affinity labels | Check statuses
+  ansible.builtin.import_role:
+    name: mrcnkwcz.ovirt.ovirt_async
+    tasks_from: check.yml
+  vars:
+    ovirt_async_statuses: "{{ ovirt_affinity_labels_statuses.results }}"
+    ovirt_async_retries: "{{ ovirt_affinity_labels_timeout // ovirt_affinity_labels_poll_interval }}"
+    ovirt_async_delay: "{{ ovirt_affinity_labels_poll_interval }}"
+  when: ovirt_affinity_labels_wait

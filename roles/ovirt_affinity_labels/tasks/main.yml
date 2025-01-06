@@ -1,0 +1,17 @@
+---
+- name: Affinity labels | Obtain token
+  ansible.builtin.include_role:
+    name: mrcnkwcz.ovirt.ovirt_auth
+    tasks_from: obtain_token.yml
+
+- name: Affinity labels | Main
+  block:
+    - name: Affinity labels | Set affinity labels state
+      ansible.builtin.include_tasks:
+        file: state.yml
+
+  always:
+    - name: Affinity labels | Revoke token
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_auth
+        tasks_from: revoke_token.yml
