@@ -8,7 +8,7 @@ ovirt_disks_vms: []
 #       backup: string                     # Enable incremental backup option
 #       bootable: boolean                  # Set disk as bootable (true, false)
 #       description: string                # Add description to disk
-#       format: string                     # Set disk format (cow*, raw). May inherit from "disk_format" value [required]
+#       format: string                     # Set disk format (cow*, raw). May inherit from "disk_format" [required]
 #       interface: string                  # Set disk interface (virtio_scsi*, virtio, sata, ide)
 #       name: string                       # Name of disk [required]
 #       pass_discard: boolean              # Set pass discard (true, false)

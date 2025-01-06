@@ -45,7 +45,8 @@ ovirt_vms: [] # noqa: var-naming[no-role-prefix]
 #   cluster: string                        # Set cluster name
 #   comment: string                        # Add comment
 #   cpu_cores: integer                     # Set number of CPU cores
-#   cpu_mode: string                       # CPU mode. For "host_passthrough" set "placement_policy" to "pinned" ("host_passthrough", "host_model", "custom")
+#   cpu_mode: string                       # CPU mode. For "host_passthrough" set "placement_policy" to "pinned"
+#                                            ("host_passthrough", "host_model", "custom")
 #   cpu_pinning:                           # CPU pinning topology to map virtual CPU to host CPU
 #     - cpu: string                        # Number of the host CPU
 #       vcpu: string                       # Number of the virtual CPU
@@ -91,7 +92,8 @@ ovirt_vms: [] # noqa: var-naming[no-role-prefix]
 #   host_devices:                          # Set host devices
 #     - name: string                       # Name of device from host
 #       state: string                      # Device state
-#   initrd_path: string                    # Path to initial ramdisk to be used with kernel specified by "kernel_path" option. Stored on host or ISO domain
+#   initrd_path: string                    # Path to initial ramdisk used with kernel specified by "kernel_path" option.
+#                                            Stored on host or ISO domain
 #   instance_type: string                  # Instance type
 #   io_threads: integer                    # Number of I/O threads
 #   kernel_params: string                  # Kernel command line parameters
@@ -104,7 +106,8 @@ ovirt_vms: [] # noqa: var-naming[no-role-prefix]
 #   multi_queues_enabled: boolean          # Enable SCSI multi queues (true, false)
 #   name: string                           # Name of VM
 #   nics:                                  # List of nics
-#     - interface: string                  # Set interface if nic (e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan, virtio*)
+#     - interface: string                  # Set interface if nic
+#                                            (e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan, virtio*)
 #       mac_address: string                # Set custom MAC
 #       network: string                    # Set network
 #       network_filter_parameters:         # Set network filters
@@ -113,14 +116,15 @@ ovirt_vms: [] # noqa: var-naming[no-role-prefix]
 #       name: string                       # Nic name
 #       linked: boolean                    # Link nic to VM
 #       profile: string                    # Nic profile
-#   numa_nodes:                            # List of vNUMA Nodes to set for this VM and pin them to assigned host's physical NUMA node
+#   numa_nodes:                            # List of vNUMA nodes and pin them to host's physical NUMA nodes
 #     - cores:                             # List of VM CPU cores
 #         - integer
 #       index: string                      # The index of NUMA node
 #       memory: string                     # Memory size of the NUMA node in MiB
 #       numa_node_pins:                    # List of physical NUMA nodes to pin virtual
 #         - integer
-#   numa_tune_mode: string                 # Set how the memory allocation for NUMA nodes of this VM is applied (interleave, preferred, strict)
+#   numa_tune_mode: string                 # Set how the memory allocation for NUMA nodes of this VM is applied
+#                                            (interleave, preferred, strict)
 #   operating_system: string               # Set VM OS
 #   placement_policy: string               # Set placement policy (migratable, pinned, user_migratable)
 #   placement_policy_hosts:                # Set list of hosts for policy
@@ -138,7 +142,7 @@ ovirt_vms: [] # noqa: var-naming[no-role-prefix]
 #   storage_error_resume_behavior: string  # Option, when storage domain unresponsive (auto_resume, kill, leave_pause)
 #   sysprep:                               # Sysprep for Windows machines
 #     active_directory_ou: string          # Active Directory Organizational Unit, to be used for login of user
-#     custom_script: string                # A custom Sysprep definition in the format of a complete unattended installation answer file
+#     custom_script: string                # A custom sysprep script
 #     domain: string                       # VM Domain
 #     host_name: string                    # Hostname to be set to Virtual Machine when deployed
 #     input_locale: string                 # Input localization of the Windows Virtual Machine
