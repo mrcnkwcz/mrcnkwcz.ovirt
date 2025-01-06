@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]
@@ -22,39 +22,48 @@ jobs:
 
   pylint:
     needs: setup
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+      - name: Show pip packages
+        run: |
+          pip list
       - name: Lint the code with pylint
         run: |
           pylint $(git ls-files '*.py')
 
   yamllint:
     needs: setup
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+      - name: Show pip packages
+        run: |
+          pip list
       - name: Lint the code with yamllint
         run: |
           yamllint --format=auto $(git ls-files '*.yml')
 
   ansible-lint:
     needs: setup
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: ["3.10", "3.11"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+      - name: Show pip packages
+        run: |
+          pip list
       - name: Lint the code with ansible-lint
         run: |
           ansible-lint $(git ls-files '*.yml')
