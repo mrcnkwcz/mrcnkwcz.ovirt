@@ -1,0 +1,22 @@
+---
+- name: Disks | Set disks statuses fact
+  ansible.builtin.set_fact:
+    ovirt_disks_statuses: []
+
+- name: Disks | Create disks
+  ansible.builtin.include_tasks:
+    file: state.yml
+  loop: "{{ ovirt_disks_vms }}"
+  loop_control:
+    loop_var: ovirt_vm
+    label: "{{ ovirt_vm.name }}"
+
+- name: Disks | Check statuses
+  ansible.builtin.import_role:
+    name: mrcnkwcz.ovirt.ovirt_async
+    tasks_from: check.yml
+  vars:
+    ovirt_async_statuses: "{{ ovirt_disks_statuses }}"
+    ovirt_async_retries: "{{ ovirt_disks_timeout // ovirt_disks_poll_interval }}"
+    ovirt_async_delay: "{{ ovirt_disks_poll_interval }}"
+  when: ovirt_disks_wait

@@ -1,0 +1,17 @@
+---
+- name: Disks | Obtain token
+  ansible.builtin.include_role:
+    name: mrcnkwcz.ovirt.ovirt_auth
+    tasks_from: obtain_token.yml
+
+- name: Disks | Main
+  block:
+    - name: Disks | Disks
+      ansible.builtin.include_tasks:
+        file: disks.yml
+
+  always:
+    - name: Disks | Revoke token
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_auth
+        tasks_from: revoke_token.yml
