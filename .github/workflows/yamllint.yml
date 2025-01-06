@@ -1,0 +1,23 @@
+name: Yamllint
+
+on: [push]
+
+jobs:
+  pylint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11"]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install linter dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install yammlint
+    - name: Lint the code with pylint
+      run: |
+        yamllint $(git ls-files '*.yml')
