@@ -4,11 +4,11 @@ ovirt_auth_username: ""     # Username with domain for authentication. Example: 
 ovirt_auth_password: ""     # Password for user
 ovirt_auth_hostname: ""     # Engine hostname. May be used instead of URL. Example: "engine.infra.example"
 ovirt_auth_ca_file: ""      # A PEM file containing the trusted CA certificates. Example: ~/ca.crt
-ovirt_auth_insecure: false  # A boolean flag that indicates if the server TLS certificate and host name should be checked (true, false*)
+ovirt_auth_insecure: false  # A boolean flag if the server TLS certificate should be checked (true, false*)
 ovirt_auth_token:           # May be used token instead of username with password
 ovirt_auth_headers: {}      # A dictionary of HTTP headers to be added to each API call
 ovirt_auth_kerberos: false  # Set using kerberos auth instead of standard auth (true, false*)
-ovirt_auth_compress: true   # A boolean flag indicating if the SDK should ask the server to send compressed responses (true*, false)
+ovirt_auth_compress: true   # A boolean flag if the SDK should ask server to send compressed responses (true*, false)
 ovirt_auth_timeout: 15      # Time during which the connection to the server must be established
 
 # Environment variables

@@ -2,7 +2,8 @@
 ovirt_nics_vms: []
 # - name: string                   # Name of VM [required]
 #   nics:                          # List of nics
-#     - interface: string          # Set interface if nic (e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan, virtio*)
+#     - interface: string          # Set nic type
+#                                    (e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan, virtio*)
 #       mac_address: string        # Set custom MAC
 #       network: string            # Set network [required]
 #       network_filter_parameters: # Set network filters
