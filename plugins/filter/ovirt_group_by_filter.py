@@ -1,6 +1,8 @@
+'Module for grouping oVirt objects'
+
 from collections import defaultdict
 
-class FilterModule(object):
+class FilterModule:
     'Filter for grouping oVirt objects'
     def filters(self):
         'Define filters'
