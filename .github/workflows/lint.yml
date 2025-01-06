@@ -14,14 +14,27 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
+      - name: Restore cached virtualenv
+        uses: actions/cache/restore@v4
+        with:
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-linter
+          path: .venv
       - name: Upgrade pip and install dependencies
         run: |
+          python -m venv .venv
+          source .venv/bin/activate
           python -m pip install --upgrade pip==22.0.2
           pip install \
           ansible-lint==24.12.2 \
           pylint==3.3.3 \
           yamllint==1.35.1
+          echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
+          echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
+      - name: Saved cached virtualenv
+        uses: actions/cache/save@v4
+        with:
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-linter
+          path: .venv
 
   pylint:
     needs: setup
@@ -34,9 +47,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
+      - name: Restore cached virtualenv
+        uses: actions/cache/restore@v4
+        with:
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-linter
+          path: .venv
       - name: Install pip packages
         run: |
+          source .venv/bin/activate
           python -m pip install --upgrade pip==22.0.2
           pip install \
           pylint==3.3.3
@@ -55,9 +73,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
+      - name: Restore cached virtualenv
+        uses: actions/cache/restore@v4
+        with:
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-linter
+          path: .venv
       - name: Install pip packages
         run: |
+          source .venv/bin/activate
           python -m pip install --upgrade pip==22.0.2
           pip install \
           yamllint==1.35.1
@@ -76,9 +99,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-          cache: 'pip'
+      - name: Restore cached virtualenv
+        uses: actions/cache/restore@v4
+        with:
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-linter
+          path: .venv
       - name: Install pip packages
         run: |
+          source .venv/bin/activate
           python -m pip install --upgrade pip==22.0.2
           pip install \
           ansible-lint==24.12.2
