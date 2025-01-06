@@ -1,0 +1,19 @@
+---
+namespace: mrcnwkcz
+name: ovirt
+description: Collection for oVirt environments
+version: 0.1.0
+readme: README.md
+authors:
+  - Martsinkevich Artur
+dependencies:
+  "ovirt.ovirt": ">=3.2.0"
+license:
+  - "Apache-2.0"
+  - "GPL-3.0-or-later"
+tags:
+  - infrastructure
+  - cloud
+  - linux
+  - virtualization
+repository: https://github.com/mrcnkwcz/mrcnkwcz.ovirt
