@@ -35,9 +35,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-      - name: Show pip packages
+      - name: Install pip packages
         run: |
-          pip list
+          python -m pip install --upgrade pip==22.0.2
+          pip install \
+          pylint==3.3.3
       - name: Lint the code with pylint
         run: |
           pylint $(git ls-files '*.py')
@@ -54,9 +56,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-      - name: Show pip packages
+      - name: Install pip packages
         run: |
-          pip list
+          python -m pip install --upgrade pip==22.0.2
+          pip install \
+          yamllint==1.35.1
       - name: Lint the code with yamllint
         run: |
           yamllint --format=auto $(git ls-files '*.yml')
@@ -73,9 +77,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
-      - name: Show pip packages
+      - name: Install pip packages
         run: |
-          pip list
+          python -m pip install --upgrade pip==22.0.2
+          pip install \
+          ansible-lint==24.12.2
       - name: Lint the code with ansible-lint
         run: |
           ansible-lint $(git ls-files '*.yml')
