@@ -58,6 +58,8 @@ jobs:
           python -m pip install --upgrade pip==22.0.2
           pip install \
           pylint==3.3.3
+          echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
+          echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
       - name: Lint the code with pylint
         run: |
           pylint $(git ls-files '*.py')
@@ -84,6 +86,8 @@ jobs:
           python -m pip install --upgrade pip==22.0.2
           pip install \
           yamllint==1.35.1
+          echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
+          echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
       - name: Lint the code with yamllint
         run: |
           yamllint --format=auto $(git ls-files '*.yml')
@@ -110,6 +114,8 @@ jobs:
           python -m pip install --upgrade pip==22.0.2
           pip install \
           ansible-lint==24.12.2
+          echo "$VIRTUAL_ENV/bin" >> $GITHUB_PATH
+          echo "VIRTUAL_ENV=$VIRTUAL_ENV" >> $GITHUB_ENV
       - name: Lint the code with ansible-lint
         run: |
           ansible-lint $(git ls-files '*.yml')
