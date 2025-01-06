@@ -1,0 +1,90 @@
+---
+- name: Virtual machines | Set virtual machine state
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth | mandatory(msg='Authentication required') }}"
+    name: "{{ ovirt_vm.name | mandatory(msg='VM name required') }}"
+    cluster: "{{ ovirt_vm.cluster | mandatory(msg='Cluster name required') }}"
+    ballooning_enabled: "{{ ovirt_vm.ballooning_enabled | default(omit) }}"
+    bios_type: "{{ ovirt_vm.bios_type | default(omit) }}"
+    boot_devices: "{{ ovirt_vm.boot_devices | default(omit) }}"
+    boot_menu: "{{ ovirt_vm.boot_menu | default(omit) }}"
+    cd_iso: "{{ ovirt_vm.cd_iso | default(omit) }}"
+    clone: "{{ ovirt_vm.clone | default(omit) }}"
+    clone_permissions: "{{ ovirt_vm.clone_permissions | default(omit) }}"
+    comment: "{{ ovirt_vm.comment | default(omit) }}"
+    cpu_cores: "{{ ovirt_vm.cpu_cores | default(omit) }}"
+    cpu_mode: "{{ ovirt_vm.cpu_mode | default(omit) }}"
+    cpu_pinning: "{{ ovirt_vm.cpu_pinning | default(omit) }}"
+    cpu_shares: "{{ ovirt_vm.cpu_shares | default(omit) }}"
+    cpu_sockets: "{{ ovirt_vm.cpu_sockets | default(omit) }}"
+    cpu_threads: "{{ ovirt_vm.cpu_threads | default(omit) }}"
+    custom_compatibility_version: "{{ ovirt_vm.custom_compatibility_version | default(omit) }}"
+    custom_emulated_machine: "{{ ovirt_vm.custom_emulated_machine | default(omit) }}"
+    custom_properties: "{{ ovirt_vm.custom_properties | default(omit) }}"
+    delete_protected: "{{ ovirt_vm.delete_protected | default(omit) }}"
+    description: "{{ ovirt_vm.description | default(omit) }}"
+    disk_format: "{{ ovirt_vm.disk_format | default(omit) }}"
+    graphical_console: "{{ ovirt_vm.graphical_console | default(omit) }}"
+    high_availability: "{{ ovirt_vm.high_availability | default(omit) }}"
+    high_availability_priority: "{{ ovirt_vm.high_availability_priority | default(omit) }}"
+    host: "{{ ovirt_vm.host | default(omit) }}"
+    host_devices: "{{ ovirt_vm.host_devices | default(omit) }}"
+    instance_type: "{{ ovirt_vm.instance_type | default(omit) }}"
+    io_threads: "{{ ovirt_vm.io_threads | default(omit) }}"
+    lease: "{{ ovirt_vm.lease | default(omit) }}"
+    memory: "{{ ovirt_vm.memory | default(omit) }}"
+    memory_guaranteed: "{{ ovirt_vm.memory_guaranteed | default(omit) }}"
+    memory_max: "{{ ovirt_vm.memory_max | default(omit) }}"
+    multi_queues_enabled: "{{ ovirt_vm.multi_queues_enabled | default(omit) }}"
+    numa_nodes: "{{ ovirt_vm.numa_nodes | default(omit) }}"
+    numa_tune_mode: "{{ ovirt_vm.numa_tune_mode | default(omit) }}"
+    operating_system: "{{ ovirt_vm.operating_system | default(omit) }}"
+    placement_policy: "{{ ovirt_vm.placement_policy | default(omit) }}"
+    placement_policy_hosts: "{{ ovirt_vm.placement_policy_hosts | default(omit) }}"
+    quota_id: "{{ ovirt_vm.quota_id | default(omit) }}"
+    rng_device: "{{ ovirt_vm.rng_device | default(omit) }}"
+    serial_console: "{{ ovirt_vm.serial_console | default(omit) }}"
+    serial_policy: "{{ ovirt_vm.serial_policy | default(omit) }}"
+    serial_policy_value: "{{ ovirt_vm.serial_policy_value | default(omit) }}"
+    smartcard_enabled: "{{ ovirt_vm.smartcard_enabled | default(omit) }}"
+    soundcard_enabled: "{{ ovirt_vm.soundcard_enabled | default(omit) }}"
+    sso: "{{ ovirt_vm.sso | default(omit) }}"
+    storage_domain: "{{ ovirt_vm.storage_domain | default(omit) }}"
+    storage_error_resume_behaviour: "{{ ovirt_vm.storage_error_resume_behaviour | default(omit) }}"
+    template: "{{ ovirt_vm.template | default(omit) }}"
+    template_version: "{{ ovirt_vm.template_version | default(omit) }}"
+    timezone: "{{ ovirt_vm.timezone | default(omit) }}"
+    tpm_enabled: "{{ ovirt_vm.tpm_enabled | default(omit) }}"
+    type: "{{ ovirt_vm.type | default(omit) }}"
+    usb_support: "{{ ovirt_vm.usb_support | default(omit) }}"
+    use_latest_template_version: "{{ ovirt_vm.use_latest_template_version | default(omit) }}"
+    virtio_scsi_enabled: "{{ ovirt_vm.virtio_scsi_enabled | default(omit) }}"
+    virtio_scsi_multi_queues: "{{ ovirt_vm.virtio_scsi_multi_queues | default(omit) }}"
+    watchdog: "{{ ovirt_vm.watchdog | default(omit) }}"
+    state: "{{ 'present' if ovirt_vm.state | default('present') != 'absent' else 'absent' }}"
+    wait: "{{ ovirt_vms_wait }}"
+    timeout: "{{ ovirt_vms_timeout }}"
+    poll_interval: "{{ ovirt_vms_poll_interval }}"
+  loop: "{{ ovirt_vms }}"
+  loop_control:
+    loop_var: ovirt_vm
+    label: "{{ ovirt_vm.name }}"
+  async: "{{ ovirt_vms_timeout }}"
+  poll: 0
+  register: ovirt_vms_statuses
+
+- name: Virtual machines | Check statuses
+  ansible.builtin.import_role:
+    name: mrcnkwcz.ovirt.ovirt_async
+    tasks_from: check.yml
+  vars:
+    ovirt_async_statuses: "{{ ovirt_vms_statuses.results }}"
+    ovirt_async_retries: "{{ ovirt_vms_timeout // ovirt_vms_poll_interval }}"
+    ovirt_async_delay: "{{ ovirt_vms_poll_interval }}"
+  when: ovirt_vms_wait
+
+- name: Virtual machines | Remove virtual machines in the absent state
+  ansible.builtin.set_fact:
+    ovirt_vms: >-
+      {{ (ovirt_vms | rejectattr('state', 'defined') | list |
+          union(ovirt_vms | selectattr('state', 'defined') | rejectattr('state', 'equalto', 'absent')) | list) }}

@@ -1,0 +1,170 @@
+---
+ovirt_vms: [] # noqa: var-naming[no-role-prefix]
+# - affinity_groups:                       # List of Affinity groups
+#     - string                             # Name of Affinity group
+#   affinity_labels:                       # List of Affinity labels
+#     - string                             # Name of Affinity label
+#   ballooning_enabled: boolean            # Enable balloning (true, false)
+#   bios_type: string                      # Bios type (i440fx_sea_bios, q35_ovmf, q35_sea_bios, q35_secure_boot)
+#   boot_devices:                          # List of boot devices
+#     - string                             # Name of boot device (cdrom, hd, network)
+#   boot_menu: boolean                     # Enable boot menu (true, false)
+#   cd_iso: string                         # Set ISO file, for filter can use storage_domain
+#   clone: boolean                         # Create independent VM from template (true, false)
+#   clone_permissions: boolean             # Clone permission from template (true, false)
+#   cloud_init:                            # Cloud-init
+#     authorized_ssh_keys: string          # Add public key to authorized_keys file
+#     custom_script: string                # Add custom script
+#     dns_search: string                   # Add DNS domain search
+#     dns_servers: string                  # Add DNS servers. Max - 2. Example: "1.1.1.1 8.8.8.8"
+#     host_name: string                    # Set VM hostname
+#     nic_boot_protocol: string            # Set nic IPv4 boot protocol (none, dhcp, static)
+#     nic_boot_protocol_v6: string         # Set nic IPv6 boot protocol (none", dhcp, static)
+#     nic_gateway: string                  # Set nic IPv4 gateway
+#     nic_gateway_v6: string               # Set nic IPv6 gateway
+#     nic_ip_address: string               # Set nic IPv4 address
+#     nic_ip_address_v6: string            # Set nic IPv6 address
+#     nic_name: string                     # Set nic name
+#     nic_netmask: string                  # Set nic IPv4 netmask
+#     nic_netmask_v6: string               # Set nic IPv6 netmask
+#     regenerate_ssh_keys: boolean         # Regenerate SSH keys
+#     root_password: boolean               # Set root user password
+#     timezone: string                     # Set timezone
+#     user_name: string                    # Set root user username
+#   cloud_init_nics:                       # Cloud init nics for many nics
+#     - nic_boot_protocol: string          # Set nic IPv4 boot protocol (none, dhcp, static)
+#       nic_boot_protocol_v6: string       # Set nic IPv6 boot protocol (none, dhcp, static)
+#       nic_gateway: string                # Set nic IPv4 gateway
+#       nic_gateway_v6: string             # Set nic IPv6 gateway
+#       nic_ip_address: string             # Set nic IPv4 address
+#       nic_ip_address_v6: string          # Set nic IPv6 address
+#       nic_name: string                   # Set nic name
+#       nic_netmask: string                # Set nic IPv4 netmask
+#       nic_netmask_v6: string             # Set nic IPv6 netmask
+#   cloud_init_persist: boolean            # Set cloud init configuration persist (true, false)
+#   cluster: string                        # Set cluster name
+#   comment: string                        # Add comment
+#   cpu_cores: integer                     # Set number of CPU cores
+#   cpu_mode: string                       # CPU mode. For "host_passthrough" set "placement_policy" to "pinned" ("host_passthrough", "host_model", "custom")
+#   cpu_pinning:                           # CPU pinning topology to map virtual CPU to host CPU
+#     - cpu: string                        # Number of the host CPU
+#       vcpu: string                       # Number of the virtual CPU
+#   cpu_shares: integer                    # Set a CPU shares
+#   cpu_sockets: integer                   # Set number of virtual CPU sockets
+#   cpu_threads: integer                   # Set number of virtual CPU threads
+#   custom_compatibility_version: string   # Overrides the cluster's compatibility version
+#   custom_emulated_machine: string        # Sets the value of the custom_emulated_machine attribute
+#   custom_properties:                     # Properties sent to VDSM to configure various hooks
+#     - name: string                       # Name of the custom property. Example: "hugepages", "sap_agent", etc
+#       regexp: string                     # Regular expression to set for property
+#       value: string                      # Value of property
+#   delete_protected: boolean              # Add delete protection to VM
+#   description: string                    # Add description
+#   disk_format: string                    # Set disk format of VM (cow, raw)
+#   disks:                                 # List of virtual disks
+#     - activate: boolean                  # Activate disk after creation (true, false)
+#       backup: string                     # Enable backup option (incremental)
+#       bootable: boolean                  # Set disk as bootable (true, false)
+#       description: string                # Add description to disk
+#       format: string                     # Set disk format (cow*, raw). May inherit from disk_format value
+#       interface: string                  # Set disk interface (virtio_scsi, virtio, sata, ide)
+#       name: string                       # Name of disk
+#       pass_discard: boolean              # Set pass discard (true, false)
+#       profile: string                    # Set disk profile
+#       read_only: boolean                 # Set disk as read only
+#       shareable: boolean                 # Set disk as shareable (true, false)
+#       size: string                       # Set disk size
+#       storage_domain: string             # Set storage domain. May inherit from VM storage_domain (true, false)
+#       wipe_after_delete: boolean         # Set wipe after delete (true, false)
+#     graphical_console:                   # Set graphical console
+#       copy_paste_enabled: boolean        # Enable copy paste (true, false)
+#       disconnect_action: string          # Action after disconnect (none, lock_screen, logout, reboot, shutdown)
+#       file_transfer_enabled: boolean     # Enable file transfer for SPICE (true, false)
+#       headless_mode: boolean             # Set headless mode
+#       keyboard_layout: string            # Set keyboard layout for VNC
+#       monitors: integer                  # Numbers of monitor (1, 2, 4)
+#       protocol:                          # Set console protocol
+#         - string                         # Name of protocol (spice, vnc)
+#   high_availability: boolean             # Set HA (true, false)
+#   high_availability_priority: integer    # Set HA priority (0-100)
+#   host: string                           # Set host for VM running
+#   host_devices:                          # Set host devices
+#     - name: string                       # Name of device from host
+#       state: string                      # Device state
+#   initrd_path: string                    # Path to initial ramdisk to be used with kernel specified by "kernel_path" option. Stored on host or ISO domain
+#   instance_type: string                  # Instance type
+#   io_threads: integer                    # Number of I/O threads
+#   kernel_params: string                  # Kernel command line parameters
+#   kernel_params_persist: boolean         # Set kernel parameters persist (true, false)
+#   kernel_path: string                    # Set kernel path. Kernel imaged stored on host or ISO domain
+#   lease: string                          # Add storage domain name for lease
+#   memory: string                         # Set amount of memory
+#   memory_guaranteed: string              # Set amount of guaranteed memory
+#   memory_max: string                     # Set amount of maximum memory
+#   multi_queues_enabled: boolean          # Enable SCSI multi queues (true, false)
+#   name: string                           # Name of VM
+#   nics:                                  # List of nics
+#     - interface: string                  # Set interface if nic (e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan, virtio*)
+#       mac_address: string                # Set custom MAC
+#       network: string                    # Set network
+#       network_filter_parameters:         # Set network filters
+#         - name: string                   # Filter name
+#           value: string                  # Filter value
+#       name: string                       # Nic name
+#       linked: boolean                    # Link nic to VM
+#       profile: string                    # Nic profile
+#   numa_nodes:                            # List of vNUMA Nodes to set for this VM and pin them to assigned host's physical NUMA node
+#     - cores:                             # List of VM CPU cores
+#         - integer
+#       index: string                      # The index of NUMA node
+#       memory: string                     # Memory size of the NUMA node in MiB
+#       numa_node_pins:                    # List of physical NUMA nodes to pin virtual
+#         - integer
+#   numa_tune_mode: string                 # Set how the memory allocation for NUMA nodes of this VM is applied (interleave, preferred, strict)
+#   operating_system: string               # Set VM OS
+#   placement_policy: string               # Set placement policy (migratable, pinned, user_migratable)
+#   placement_policy_hosts:                # Set list of hosts for policy
+#     - string
+#   quota_id: string                       # Virtual Machine quota ID to be used for disk
+#   rng_device: string                     # Set random number generator (urandom, random, hwrng)
+#   serial_console: boolean                # Enable VirtIO console (true, false)
+#   serial_policy: string                  # Specify a serial number policy (vm, host, custom)
+#   serial_policy_value: string            # Set custom serial number if "serial_policy" is custom
+#   smartcard_enabled: boolean             # Enable smartcard (true, false)
+#   soundcard_enabled: boolean             # Enable soundcard (true, false)
+#   sso: boolean                           # Enable SSO (true, false)
+#   stateless: boolean                     # Set VM stateless (true, false)
+#   storage_domain: string                 # Name of storage domain, where disks from VM template should be created
+#   storage_error_resume_behavior: string  # Option, when storage domain unresponsive (auto_resume, kill, leave_pause)
+#   sysprep:                               # Sysprep for Windows machines
+#     active_directory_ou: string          # Active Directory Organizational Unit, to be used for login of user
+#     custom_script: string                # A custom Sysprep definition in the format of a complete unattended installation answer file
+#     domain: string                       # VM Domain
+#     host_name: string                    # Hostname to be set to Virtual Machine when deployed
+#     input_locale: string                 # Input localization of the Windows Virtual Machine
+#     org_name: string                     # VM Organization name
+#     root_password: string                # Password of Administrator user
+#     system_locale: string                # System localization of the Windows Virtual Machine
+#     timezone: string                     # VM Timezone
+#     ui_language: string                  # VM UI language
+#     user_name: string                    # Name of Administrator user
+#     windows_license_key: string          # License key
+#   tags:                                  # List of tags
+#     - string                             # Tag name
+#   template: string                       # Template name
+#   template_version: integer              # Template version
+#   timezone: string                       # VM timezone
+#   tpm_enabled: boolean                   # Enable TPM (true, false)
+#   type: string                           # VM type (desktop, server, high_performance)
+#   usb_support: boolean                   # Enable USB support
+#   use_latest_template_version: boolean   # Use latest version of template (true, false)
+#   virtio_scsi_enabled: boolean           # Enable VirtIO SCSI support (true, false)
+#   virtio_scsi_multi_queues: integer      # Set number of VirtIO SCSI multi queues
+#   volatile: boolean                      # Set configuration discard in guest-initiated reboot (true, false)
+#   watchdog:                              # Set watchdog
+#     action: string                       # Set watchdog action (none, reset, poweroff, pause, dump)
+#     model: string                        # Set model (i6300esb, diag288, none)
+
+ovirt_vms_wait: true       # Waiting for a response about VMs state
+ovirt_vms_timeout: 300     # VMs state timeout
+ovirt_vms_poll_interval: 3 # Interval for checking VM state

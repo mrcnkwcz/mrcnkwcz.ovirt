@@ -1,0 +1,87 @@
+---
+- name: Virtual machines | Obtain token
+  ansible.builtin.include_role:
+    name: mrcnkwcz.ovirt.ovirt_auth
+    tasks_from: obtain_token.yml
+    apply:
+      tags: [always, auth]
+  tags:
+    - always
+    - auth
+
+- name: Virtual machines | Main
+  block:
+    - name: Virtual machines | Set virtual machines states
+      ansible.builtin.include_tasks:
+        file: state.yml
+        apply:
+          tags: state
+      tags: state
+
+    - name: Virtual machines | Set virtual machines nics
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_nics
+        tasks_from: nics.yml
+        apply:
+          tags: nics
+      vars:
+        ovirt_nics_vms: "{{ ovirt_vms }}"
+      tags: nics
+
+    - name: Virtual machines | Set virtual machines disks
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_disks
+        tasks_from: disks.yml
+        apply:
+          tags: disks
+      vars:
+        ovirt_disks_vms: "{{ ovirt_vms }}"
+      tags: disks
+
+    - name: Virtual machines | Set virtual machines tags
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_tags
+        tasks_from: state.yml
+        apply:
+          tags: tags
+      vars:
+        ovirt_tags: "{{ ovirt_vms | mrcnkwcz.ovirt.ovirt_group_by_tags }}"
+      tags: tags
+
+    - name: Virtual machines | Set virtual machines affinity labels
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_affinity_labels
+        tasks_from: state.yml
+        apply:
+          tags: affinity_labels
+      vars:
+        ovirt_affinity_labels: "{{ ovirt_vms | mrcnkwcz.ovirt.ovirt_group_by_affinity_labels }}"
+      tags: affinity_labels
+
+    - name: Virtual machines | Set virtual machines affinity groups
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_affinity_groups
+        tasks_from: state.yml
+        apply:
+          tags: affinity_groups
+      vars:
+        ovirt_affinity_groups: "{{ ovirt_vms | mrcnkwcz.ovirt.ovirt_group_by_affinity_groups }}"
+      tags: affinity_groups
+
+    - name: Virtual machines | Init VM state
+      ansible.builtin.include_tasks:
+        file: init_state.yml
+        apply:
+          tags: init_state
+      tags: init_state
+
+  always:
+    - name: Virtual machines | Revoke token
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_auth
+        tasks_from: revoke_token.yml
+        apply:
+          tags: [always, auth]
+      tags:
+        - always
+        - auth

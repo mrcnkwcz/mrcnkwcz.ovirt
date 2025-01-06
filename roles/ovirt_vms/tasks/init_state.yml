@@ -1,0 +1,37 @@
+---
+- name: Virtual machines | Init virtual machine state
+  ovirt.ovirt.ovirt_vm:
+    auth: "{{ ovirt_auth | mandatory(msg='Authentication required') }}"
+    name: "{{ ovirt_vm.name | mandatory(msg='VM name required') }}"
+    cluster: "{{ ovirt_vm.cluster | mandatory(msg='Cluster name required') }}"
+    cloud_init: "{{ ovirt_vm.cloud_init | default(omit) }}"
+    cloud_init_nics: "{{ ovirt_vm.cloud_init_nics | default(omit) }}"
+    cloud_init_persist: "{{ ovirt_vm.cloud_init_persist | default(omit) }}"
+    initrd_path: "{{ ovirt_vm.initrd_path | default(omit) }}"
+    kernel_params: "{{ ovirt_vm.kernel_params | default(omit) }}"
+    kernel_params_persist: "{{ ovirt_vm.kernel_params_persist | default(omit) }}"
+    kernel_path: "{{ ovirt_vm.kernel_path | default(omit) }}"
+    stateless: "{{ ovirt_vm.stateless | default(omit) }}"
+    sysprep: "{{ ovirt_vm.sysprep | default(omit) }}"
+    volatile: "{{ ovirt_vm.volatile | default(omit) }}"
+    state: "{{ ovirt_vm.state | default('present') }}"
+    wait: "{{ ovirt_vms_wait }}"
+    timeout: "{{ ovirt_vms_timeout }}"
+    poll_interval: "{{ ovirt_vms_poll_interval }}"
+  loop: "{{ ovirt_vms }}"
+  loop_control:
+    loop_var: ovirt_vm
+    label: "{{ ovirt_vm.name }}"
+  async: "{{ ovirt_vms_timeout }}"
+  poll: 0
+  register: ovirt_vms_statuses
+
+- name: Virtual machines | Check statuses
+  ansible.builtin.import_role:
+    name: mrcnkwcz.ovirt.ovirt_async
+    tasks_from: check.yml
+  vars:
+    ovirt_async_statuses: "{{ ovirt_vms_statuses.results }}"
+    ovirt_async_retries: "{{ ovirt_vms_timeout // ovirt_vms_poll_interval }}"
+    ovirt_async_delay: "{{ ovirt_vms_poll_interval }}"
+  when: ovirt_vms_wait
