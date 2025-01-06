@@ -41,6 +41,7 @@ jobs:
       matrix:
         python-version: ["3.10", "3.11"]
     steps:
+      - uses: actions/checkout@v4
       - name: Install yamllint dependencies
         run: |
           pip install yamllint
@@ -55,6 +56,7 @@ jobs:
       matrix:
         python-version: ["3.10", "3.11"]
     steps:
+      - uses: actions/checkout@v4
       - name: Install ansible-lint dependencies
         run: |
           pip install ansible-lint
