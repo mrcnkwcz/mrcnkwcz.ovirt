@@ -1,0 +1,17 @@
+---
+- name: Affinity groups | Obtain token
+  ansible.builtin.include_role:
+    name: mrcnkwcz.ovirt.ovirt_auth
+    tasks_from: obtain_token.yml
+
+- name: Affinity groups | Main
+  block:
+    - name: Affinity groups | Set affinity groups state
+      ansible.builtin.include_tasks:
+        file: state.yml
+
+  always:
+    - name: Affinity groups | Revoke token
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_auth
+        tasks_from: revoke_token.yml

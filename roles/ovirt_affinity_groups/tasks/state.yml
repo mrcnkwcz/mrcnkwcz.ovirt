@@ -1,0 +1,36 @@
+---
+- name: Affinity groups | Set affinity group state
+  ovirt.ovirt.ovirt_affinity_group:
+    auth: "{{ ovirt_auth | mandatory(msg='Authentication required') }}"
+    name: "{{ ovirt_affinity_group.name | mandatory(msg='Affinity label name required') }}"
+    cluster: "{{ ovirt_affinity_group.cluster | default(ovirt_cluster) | mandatory(msg='Cluster name required') }}"
+    description: "{{ ovirt_affinity_group.description | default(omit) }}"
+    host_enforcing: "{{ ovirt_affinity_group.host_enforcing | default(omit) }}"
+    host_rule: "{{ ovirt_affinity_group.host_rule | default(omit) }}"
+    hosts: "{{ ovirt_affinity_group.hosts | default(omit) }}"
+    hosts_labels: "{{ ovirt_affinity_group.hosts_labels | default(omit) }}"
+    vm_enforcing: "{{ ovirt_affinity_group.vm_enforcing | default(omit) }}"
+    vm_rule: "{{ ovirt_affinity_group.vm_rule | default(omit) }}"
+    vms: "{{ ovirt_affinity_group.vms | default(omit) }}"
+    vms_labels: "{{ ovirt_affinity_group.vms_labels | default(omit) }}"
+    state: "{{ ovirt_affinity_group.state | default('present') }}"
+    wait: "{{ ovirt_affinity_groups_wait }}"
+    timeout: "{{ ovirt_affinity_groups_timeout }}"
+    poll_interval: "{{ ovirt_affinity_groups_poll_interval }}"
+  loop: "{{ ovirt_affinity_groups }}"
+  loop_control:
+    loop_var: ovirt_affinity_group
+    label: "{{ ovirt_affinity_group.name }}"
+  register: ovirt_affinity_groups_statuses
+  async: "{{ ovirt_affinity_groups_timeout }}"
+  poll: 0
+
+- name: Affinity labels | Check statuses
+  ansible.builtin.import_role:
+    name: mrcnkwcz.ovirt.ovirt_async
+    tasks_from: check.yml
+  vars:
+    ovirt_async_statuses: "{{ ovirt_affinity_groups_statuses.results }}"
+    ovirt_async_retries: "{{ ovirt_affinity_groups_timeout // ovirt_affinity_groups_poll_interval }}"
+    ovirt_async_delay: "{{ ovirt_affinity_groups_poll_interval }}"
+  when: ovirt_affinity_groups_wait
