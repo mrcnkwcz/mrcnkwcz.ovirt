@@ -17,7 +17,7 @@ jobs:
     - name: Install linter dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install yammlint
+        pip install yamllint
     - name: Lint the code with pylint
       run: |
         yamllint $(git ls-files '*.yml')
