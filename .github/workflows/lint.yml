@@ -17,8 +17,11 @@ jobs:
           cache: 'pip'
       - name: Upgrade pip and install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install pylint yamllint ansible-lint
+          python -m pip install --upgrade pip==22.0.2
+          pip install \
+          ansible-lint==24.12.2 \
+          pylint==3.3.3 \
+          yamllint==1.35.1
 
   pylint:
     needs: setup
@@ -29,6 +32,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
       - name: Show pip packages
         run: |
           pip list
@@ -45,6 +51,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
       - name: Show pip packages
         run: |
           pip list
@@ -61,6 +70,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
       - name: Show pip packages
         run: |
           pip list
