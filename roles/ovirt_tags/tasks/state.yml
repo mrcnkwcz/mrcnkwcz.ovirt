@@ -1,0 +1,30 @@
+---
+- name: Tags | Set tag state
+  ovirt.ovirt.ovirt_tag:
+    auth: "{{ ovirt_auth | mandatory(msg='Authentication required') }}"
+    name: "{{ ovirt_tag.name | mandatory(msg='Tag name required') }}"
+    description: "{{ ovirt_tag.description | default(omit) }}"
+    hosts: "{{ ovirt_tag.hosts | default(omit) }}"
+    parent: "{{ ovirt_tag.parent | default(omit) }}"
+    vms: "{{ ovirt_tag.vms | default(omit) }}"
+    state: "{{ ovirt_tag.state | default('present') }}"
+    wait: "{{ ovirt_tags_wait }}"
+    timeout: "{{ ovirt_tags_timeout }}"
+    poll_interval: "{{ ovirt_tags_poll_interval }}"
+  loop: "{{ ovirt_tags }}"
+  loop_control:
+    loop_var: ovirt_tag
+    label: "{{ ovirt_tag.name }}"
+  register: ovirt_tags_statuses
+  async: "{{ ovirt_tags_timeout }}"
+  poll: 0
+
+- name: Tags | Check statuses
+  ansible.builtin.import_role:
+    name: mrcnkwcz.ovirt.ovirt_async
+    tasks_from: check.yml
+  vars:
+    ovirt_async_statuses: "{{ ovirt_tags_statuses.results }}"
+    ovirt_async_retries: "{{ ovirt_tags_timeout // ovirt_tags_poll_interval }}"
+    ovirt_async_delay: "{{ ovirt_tags_poll_interval }}"
+  when: ovirt_tags_wait

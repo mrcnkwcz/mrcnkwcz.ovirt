@@ -1,0 +1,14 @@
+---
+ovirt_tags: [] # noqa: var-naming[no-role-prefix]
+# - name: string         # Name of tag [required]
+#   description: string  # Description of tag
+#   hosts:               # List of hosts assigned to tag
+#     - string           # Name of host
+#   parent: string       # Parent tag
+#   vms:                 # List of VMs assigned to tag
+#     - string           # Name of VM
+#   state: string        # State of tag (present*, absent, attached, detached)
+
+ovirt_tags_wait: true       # Waiting for a response about tags state
+ovirt_tags_timeout: 3       # Tags state timeout
+ovirt_tags_poll_interval: 1 # Interval for checking tags state

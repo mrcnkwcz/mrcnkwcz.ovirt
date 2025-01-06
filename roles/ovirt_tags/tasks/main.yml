@@ -1,0 +1,17 @@
+---
+- name: Tags | Obtain token
+  ansible.builtin.include_role:
+    name: mrcnkwcz.ovirt.ovirt_auth
+    tasks_from: obtain_token.yml
+
+- name: Tags | Main
+  block:
+    - name: Tags | Set tags state
+      ansible.builtin.include_tasks:
+        file: state.yml
+
+  always:
+    - name: Tags | Revoke token
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_auth
+        tasks_from: revoke_token.yml
