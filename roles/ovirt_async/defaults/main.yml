@@ -1,0 +1,4 @@
+---
+ovirt_async_statuses: [] # List of async statuses for checking
+ovirt_async_retries: 3   # Count of retries
+ovirt_async_delay: 1     # Retry interval

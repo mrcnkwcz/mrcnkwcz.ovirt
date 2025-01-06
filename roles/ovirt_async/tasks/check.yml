@@ -1,0 +1,11 @@
+- name: Async | Check resource state
+  ansible.builtin.async_status:
+    jid: "{{ ovirt_async_status.ansible_job_id }}"
+  loop: "{{ ovirt_async_statuses }}"
+  loop_control:
+    loop_var: ovirt_async_status
+    label: "{{ ovirt_async_status.ansible_job_id }}"
+  register: ovirt_async_result
+  retries: "{{ ovirt_async_retries }}"
+  delay: "{{ ovirt_async_delay }}"
+  until: ovirt_async_result.finished
