@@ -19,6 +19,29 @@ Collection for oVirt environments
 * [ovirt_group_by_affinity_labels](plugins/filter/ovirt_group_by_affinity_labels.yml)
 * [ovirt_group_by_tags](plugins/filter/ovirt_group_by_tags.yml)
 
+## Install requirements
+### Local
+```bash
+# RPM-based distributions
+dnf -y install \
+gcc \
+libxml2-devel \
+python3-devel
+
+# APT-based distributions
+apt-get --assume-yes install \
+gcc \
+libxml2-dev \
+python3-dev
+
+python3 -m venv .venv
+
+pip install ansible
+pip install -r meta/requirements.txt
+
+ansible-galaxy collection install -r meta/requirements.yml
+```
+
 ## Licenses
 * Apache 2.0
 * GPL 3.0
