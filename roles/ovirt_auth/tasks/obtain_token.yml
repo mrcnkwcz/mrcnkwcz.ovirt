@@ -1,0 +1,18 @@
+---
+- name: Auth | Obtain token
+  ovirt.ovirt.ovirt_auth:
+    url: "{{ ovirt_auth_url }}"
+    username: "{{ ovirt_auth_username }}"
+    password: "{{ ovirt_auth_password }}"
+    hostname: "{{ ovirt_auth_hostname }}"
+    ca_file: "{{ ovirt_auth_ca_file }}"
+    token: "{{ ovirt_auth_token }}"
+    insecure: "{{ ovirt_auth_insecure }}"
+    kerberos: "{{ ovirt_auth_kerberos }}"
+    headers: "{{ ovirt_auth_headers }}"
+    compress: "{{ ovirt_auth_compress }}"
+    state: present
+    timeout: "{{ ovirt_auth_timeout }}"
+  timeout: "{{ ovirt_auth_timeout }}"
+  when:
+    - ovirt_auth is undefined or ovirt_auth | length <= 0

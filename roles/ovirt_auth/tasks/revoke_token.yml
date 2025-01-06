@@ -1,0 +1,9 @@
+---
+- name: Auth | Revoke token
+  ovirt.ovirt.ovirt_auth:
+    ovirt_auth: "{{ ovirt_auth }}"
+    state: absent
+    timeout: "{{ ovirt_auth_timeout | default(omit) }}"
+  timeout: "{{ ovirt_auth_timeout }}"
+  when:
+    - ovirt_auth is defined and ovirt_auth | length > 0
