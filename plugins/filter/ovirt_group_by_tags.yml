@@ -1,0 +1,22 @@
+DOCUMENTATION:
+  name: ovirt_group_by_tags
+  author: Martsinkevich Artur (@mrcnkwcz)
+  short_description: Group by tags
+  description:
+    - Group virtual machines by tags
+  positional: _input
+  options:
+    _input:
+      description: List of VMs
+      type: list
+      required: true
+
+EXAMPLES: |
+    - name: Group VMs by tags
+      ansible.builtin.debug:
+        msg: "{{ ovirt_vms | mrcnkwcz.ovirt.ovirt_group_by_tags }}"
+
+RETURN:
+  _value:
+    description: List of tags with list of virtual machines
+    type: list

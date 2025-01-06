@@ -1,0 +1,22 @@
+DOCUMENTATION:
+  name: ovirt_group_by_affinity_labels
+  author: Martsinkevich Artur (@mrcnkwcz)
+  short_description: Group by affinity labels
+  description:
+    - Group virtual machines by affinity labels
+  positional: _input
+  options:
+    _input:
+      description: List of VMs
+      type: list
+      required: true
+
+EXAMPLES: |
+    - name: Group VMs by affinity labels
+      ansible.builtin.debug:
+        msg: "{{ ovirt_vms | mrcnkwcz.ovirt.ovirt_group_by_affinity_labels }}"
+
+RETURN:
+  _value:
+    description: List of affinity labels with list of virtual machines
+    type: list

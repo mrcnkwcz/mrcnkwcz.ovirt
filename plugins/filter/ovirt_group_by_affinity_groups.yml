@@ -1,0 +1,22 @@
+DOCUMENTATION:
+  name: ovirt_group_by_affinity_groups
+  author: Martsinkevich Artur (@mrcnkwcz)
+  short_description: Group by affinity groups
+  description:
+    - Group virtual machines by affinity groups
+  positional: _input
+  options:
+    _input:
+      description: List of VMs
+      type: list
+      required: true
+
+EXAMPLES: |
+    - name: Group VMs by affinity groups
+      ansible.builtin.debug:
+        msg: "{{ ovirt_vms | mrcnkwcz.ovirt.ovirt_group_by_affinity_groups }}"
+
+RETURN:
+  _value:
+    description: List of affinity groups with list of virtual machines
+    type: list
