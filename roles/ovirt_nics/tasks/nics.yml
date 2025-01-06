@@ -1,0 +1,22 @@
+---
+- name: Nics | Set nics statuses fact
+  ansible.builtin.set_fact:
+    ovirt_nics_statuses: []
+
+- name: Nics | Set nic states
+  ansible.builtin.include_tasks:
+    file: state.yml
+  loop: "{{ ovirt_nics_vms }}"
+  loop_control:
+    loop_var: ovirt_nics_vm
+    label: "{{ ovirt_nics_vm }}"
+
+- name: Nics | Check statuses
+  ansible.builtin.import_role:
+    name: mrcnkwcz.ovirt.ovirt_async
+    tasks_from: check.yml
+  vars:
+    ovirt_async_statuses: "{{ ovirt_nics_statuses }}"
+    ovirt_async_retries: "{{ ovirt_nics_timeout // ovirt_nics_poll_interval }}"
+    ovirt_async_delay: "{{ ovirt_nics_poll_interval }}"
+  when: ovirt_nics_wait

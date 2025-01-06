@@ -1,0 +1,17 @@
+---
+- name: Nics | Obtain token
+  ansible.builtin.include_role:
+    name: mrcnkwcz.ovirt.ovirt_auth
+    tasks_from: obtain_token.yml
+
+- name: Nics | Main
+  block:
+    - name: Nics | Nics
+      ansible.builtin.include_tasks:
+        file: nics.yml
+
+  always:
+    - name: Nics | Revoke token
+      ansible.builtin.include_role:
+        name: mrcnkwcz.ovirt.ovirt_auth
+        tasks_from: revoke_token.yml

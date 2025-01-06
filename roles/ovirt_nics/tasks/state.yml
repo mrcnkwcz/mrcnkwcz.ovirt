@@ -1,0 +1,27 @@
+---
+- name: Nics | Set nic state
+  ovirt.ovirt.ovirt_nic:
+    auth: "{{ ovirt_auth | mandatory(msg='Authentication required') }}"
+    name: "{{ ovirt_nic.name | mandatory(msg='Nic name required') }}"
+    network: "{{ ovirt_nic.network | mandatory(msg='Network name required') }}"
+    vm: "{{ ovirt_nics_vm.name | mandatory(msg='VM name required') }}"
+    network_filter_parameters: "{{ ovirt_nic.network_filter_parameters | default(omit) }}"
+    interface: "{{ ovirt_nic.interface | default('virtio') }}"
+    linked: "{{ ovirt_nic.linked | default(omit) }}"
+    mac_address: "{{ ovirt_nic.mac_address | default(omit) }}"
+    profile: "{{ ovirt_nic.profile | default(ovirt_nic.network) }}"
+    state: "{{ ovirt_nic.state | default('present') }}"
+    wait: "{{ ovirt_nics_wait }}"
+    timeout: "{{ ovirt_nics_timeout }}"
+    poll_interval: "{{ ovirt_nics_poll_interval }}"
+  loop: "{{ ovirt_nics_vm.nics }}"
+  loop_control:
+    loop_var: ovirt_nic
+    label: "{{ ovirt_nics_vm.name }} ({{ ovirt_nic.name }})"
+  async: "{{ ovirt_nics_timeout }}"
+  poll: 0
+  register: ovirt_nics_vm_status
+
+- name: Nics | Add nics status to check
+  ansible.builtin.set_fact:
+    ovirt_nics_statuses: "{{ ovirt_nics_statuses + ovirt_nics_vm_status.results }}"
