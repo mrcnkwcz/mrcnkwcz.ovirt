@@ -1,0 +1,26 @@
+name: Linter
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+      - name: Upgrade pip and install dependencies
+        run: |
+          pip install -r meta/requirements-lint.txt
+      - name: Lint the code with pylint
+        run: |
+          pylint $(git ls-files '*.py')
+      - name: Lint the code with yamllint
+        run: |
+          yamllint -c .yamllint.yml --format=auto $(git ls-files '*.yml')
+      - name: Lint the code with ansible-lint
+        run: |
+          ansible-lint -c .ansible-lint.yml roles/
