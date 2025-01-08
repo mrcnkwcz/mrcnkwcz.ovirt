@@ -62,7 +62,8 @@
       ansible.builtin.set_fact:
         ovirt_disks: >-
           {{ (ovirt_disks | rejectattr('bootable', 'defined') | list |
-              union(ovirt_disks | selectattr('bootable', 'defined') | rejectattr('bootable', 'equalto', True)) | list) }}
+              union(ovirt_disks | selectattr('bootable', 'defined') |
+              rejectattr('bootable', 'equalto', True)) | list) }}
 
 - name: Disks | Set disk state
   ovirt.ovirt.ovirt_disk:
@@ -72,7 +73,8 @@
       if ovirt_disks_vms_prefix_name else ovirt_disk.name | mandatory('Disk name required') }}"
     format: "{{ ovirt_disk.format | default(ovirt_vm.disk_format) | mandatory(msg='Disk type required') }}"
     size: "{{ ovirt_disk.size | mandatory(msg='Disk size required') }}"
-    storage_domain: "{{ ovirt_disk.storage_domain | default(ovirt_vm.storage_domain) | mandatory(msg='Disk storage domain required') }}"
+    storage_domain: "{{ ovirt_disk.storage_domain | default(ovirt_vm.storage_domain)
+      | mandatory(msg='Disk storage domain required') }}"
     activate: "{{ ovirt_disk.activate | default(true) }}"
     backup: "{{ ovirt_disk.backup | default(omit) }}"
     bootable: "{{ ovirt_disk.bootable | default(omit) }}"
