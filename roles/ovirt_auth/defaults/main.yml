@@ -2,7 +2,7 @@
 ovirt_auth_url: ""          # URL Engine. Example: "https://engine.infra.example/ovirt-engine/api"
 ovirt_auth_username: ""     # Username with domain for authentication. Example: "api@internal" or "api@internalsso"
 ovirt_auth_password: ""     # Password for user
-ovirt_auth_hostname: ""     # Engine hostname. May be used instead of URL. Example: "engine.infra.example"
+ovirt_auth_hostname: ""     # Engine hostname. May be used instead of URL. Example: "engine.ovirt.infra.example"
 ovirt_auth_ca_file: ""      # A PEM file containing the trusted CA certificates. Example: ~/ca.crt
 ovirt_auth_insecure: false  # A boolean flag if the server TLS certificate should be checked (true, false*)
 ovirt_auth_token:           # May be used token instead of username with password
