@@ -3,7 +3,7 @@ ovirt_nics_vms: []
 # - name: string                   # Name of VM [required]
 #   nics:                          # List of nics
 #     - interface: string          # Set nic type
-#                                    (e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan, virtio*)
+#                                  # (e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan, virtio*)
 #       mac_address: string        # Set custom MAC
 #       network: string            # Set network [required]
 #       network_filter_parameters: # Set network filters
@@ -12,6 +12,7 @@ ovirt_nics_vms: []
 #       name: string               # Nic name [required]
 #       linked: boolean            # Link nic to VM
 #       profile: string            # Nic profile
+#       state: string              # Nic state (present*, absent, plugged, unplugged)
 
 ovirt_nics_wait: true       # Waiting for a response about nics state
 ovirt_nics_timeout: 3       # Nics state timeout
