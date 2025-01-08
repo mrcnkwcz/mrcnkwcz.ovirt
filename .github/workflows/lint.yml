@@ -20,7 +20,7 @@ jobs:
           pylint $(git ls-files '*.py')
       - name: Lint the code with yamllint
         run: |
-          yamllint -c .yamllint --format=auto $(git ls-files '*.yml')
+          yamllint -c .yamllint.yml --format=auto $(git ls-files '*.yml')
       - name: Lint the code with ansible-lint
         run: |
           ansible-lint -c .ansible-lint.yml roles/
