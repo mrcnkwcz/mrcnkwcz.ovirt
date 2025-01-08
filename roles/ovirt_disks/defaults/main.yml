@@ -18,6 +18,7 @@ ovirt_disks_vms: []
 #       size: string                       # Set disk size [required]
 #       storage_domain: string             # Set storage domain. May inherit from "storage_domain" value [required]
 #       wipe_after_delete: boolean         # Set wipe after delete (true, false)
+#       state: string                      # State of disk
 
 ovirt_disks_vms_prefix_name: true # Use VM name as prefix for disks (true*, false)
 ovirt_disks_vms_separator: "-"    # Set separator symbol for prefix
