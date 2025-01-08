@@ -5,13 +5,13 @@ Managing affinity labels
 ```yml
 ---
 ovirt_affinity_labels:
-# - name: string    # Name of affinity label [required]
-#   cluster: string # Cluster of affinity label [required]
-#   hosts:          # List of hosts assigned to affinity label
-#     - string      # Name of host
-#   vms:            # List of VMs assigned to affinity label
-#     - string      # Name of VM
-#   state: string   # Label state (present*, absent)
+  - name: string    # Name of affinity label [required]
+    cluster: string # Cluster of affinity label [required]
+    hosts:          # List of hosts assigned to affinity label
+      - string      # Name of host
+    vms:            # List of VMs assigned to affinity label
+      - string      # Name of VM
+    state: string   # Label state (present*, absent)
 
 ovirt_affinity_labels_wait: true       # Waiting for a response about labels state
 ovirt_affinity_labels_timeout: 3       # Labels state timeout

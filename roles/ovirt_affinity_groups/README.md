@@ -5,22 +5,22 @@ ManAffinity Grouping affinity groups
 ```yml
 ---
 ovirt_affinity_groups:
-# - name: string          # Name of affinity group [required]
-#   cluster: string       # Name of cluster for group [required]
-#   description: string   # Description of group
-#   host_enforcing: bool  # Enforce host rule (true, false)
-#   host_rule: string     # Host rule (positive, negative, disabled)
-#   hosts:                # List of hosts assigned to affinity groups
-#     - string            # Name of host
-#   hosts_labels:         # List of host affinity labels assigned to affinity groups
-#     - string            # Name of host affinity label
-#   vm_enforcing: bool    # Enforce VM rule (true, false)
-#   vm_rule: string       # VM rule (positive, negative, disabled)
-#   vms:                  # List of virtuAffinity Label machines assigned to affinity groups
-#     - string            # Name of virtuAffinity Label machine
-#   vms_labels:           # List of VM affinity labels assigned to affinity groups
-#     - string            # Name of VM affinity label
-#   state: string         # State of group (present*, absent)
+  - name: string          # Name of affinity group [required]
+    cluster: string       # Name of cluster for group [required]
+    description: string   # Description of group
+    host_enforcing: bool  # Enforce host rule (true, false)
+    host_rule: string     # Host rule (positive, negative, disabled)
+    hosts:                # List of hosts assigned to affinity groups
+      - string            # Name of host
+    hosts_labels:         # List of host affinity labels assigned to affinity groups
+      - string            # Name of host affinity label
+    vm_enforcing: bool    # Enforce VM rule (true, false)
+    vm_rule: string       # VM rule (positive, negative, disabled)
+    vms:                  # List of virtuAffinity Label machines assigned to affinity groups
+      - string            # Name of virtuAffinity Label machine
+    vms_labels:           # List of VM affinity labels assigned to affinity groups
+      - string            # Name of VM affinity label
+    state: string         # State of group (present*, absent)
 
 ovirt_affinity_groups_wait: true       # Waiting for a response about groups state
 ovirt_affinity_groups_timeout: 3       # Groups state timeout
