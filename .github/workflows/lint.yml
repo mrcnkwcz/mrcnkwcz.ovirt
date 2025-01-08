@@ -14,7 +14,7 @@ jobs:
           cache: 'pip'
       - name: Upgrade pip and install dependencies
         run: |
-          pip install meta/requirements-lint.txt
+          pip install -r meta/requirements-lint.txt
       - name: Lint the code with pylint
         run: |
           pylint $(git ls-files '*.py')
