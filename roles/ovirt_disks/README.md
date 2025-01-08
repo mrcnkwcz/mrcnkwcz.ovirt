@@ -1,4 +1,5 @@
 # Role `mrcnkwcz.ovirt.ovirt_disks`
+Managing disks
 
 ## Vars
 ```yml
