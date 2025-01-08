@@ -236,7 +236,7 @@ ovirt_vms_poll_interval: 3 # Interval for checking VM state
           - mrcnkwcz-worker-label
           - worker-label
         tags:
-          - mrcnwkcz-worker-tag
+          - mrcnkwcz-worker-tag
           - worker-tag
       - name: mrcnkwcz-worker-2
         # Cluster
@@ -276,7 +276,7 @@ ovirt_vms_poll_interval: 3 # Interval for checking VM state
           - mrcnkwcz-worker-label
           - worker-label
         tags:
-          - mrcnwkcz-worker-tag
+          - mrcnkwcz-worker-tag
           - worker-tag
       - name: mrcnkwcz-worker-3
         # Cluster
@@ -316,7 +316,7 @@ ovirt_vms_poll_interval: 3 # Interval for checking VM state
           - mrcnkwcz-worker-label
           - worker-label
         tags:
-          - mrcnwkcz-worker-tag
+          - mrcnkwcz-worker-tag
           - worker-tag
 
 ```
