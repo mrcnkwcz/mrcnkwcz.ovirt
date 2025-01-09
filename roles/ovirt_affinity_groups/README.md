@@ -47,21 +47,21 @@ ovirt_affinity_groups_poll_interval: 1 # Interval for checking groups state
     # The cluster is logically divided into two parts and VMs do not compete for resources
     # And with the help of labels and the negative rule, VMs are running on different hosts
     #
-    # APP (Cluster)
-    # ├── mrcnkwcz-k8s-group01 (Affinity Group)
-    # │   ├── app-host01 (Host)
-    # │   │   └── mrcnkwcz-k8s-worker01-sandbox (Affinity Label 01)
-    # │   ├── app-host02 (Host)
-    # │   │   └── mrcnkwcz-k8s-master01-sandbox (Affinity Label 01)
-    # │   └── app-host03 (Host)
-    # │       └── mrcnkwcz-k8s-lb01-sandbox (Affinity Label 01)
-    # └── mrcnkwcz-k8s-group02 (Affinity Group)
-    #     ├── app-host04 (Host)
-    #     │   └── mrcnkwcz-k8s-worker02-sandbox (Affinity Label 02)
-    #     ├── app-host05 (Host)
-    #     │   └── mrcnkwcz-k8s-master02-sandbox (Affinity Label 02)
-    #     └── app-host06 (Host)
-    #         └── mrcnkwcz-k8s-lb02-sandbox (Affinity Label 02)
+    # `APP`
+    # ├── `mrcnkwcz-k8s-group01`
+    # │   ├── `app-host01`
+    # │   │   └── `mrcnkwcz-k8s-worker01-sandbox` (`mrcnkwcz-k8s-label01`)
+    # │   ├── `app-host02`
+    # │   │   └── `mrcnkwcz-k8s-master01-sandbox` (`mrcnkwcz-k8s-label01`)
+    # │   └── `app-host03`
+    # │       └── `mrcnkwcz-k8s-lb01-sandbox`     (`mrcnkwcz-k8s-label01`)
+    # └── `mrcnkwcz-k8s-group02`
+    #     ├── `app-host04`
+    #     │   └── `mrcnkwcz-k8s-worker02-sandbox` (`mrcnkwcz-k8s-label02`)
+    #     ├── `app-host05`
+    #     │   └── `mrcnkwcz-k8s-master02-sandbox` (`mrcnkwcz-k8s-label02`)
+    #     └── `app-host06`
+    #         └── `mrcnkwcz-k8s-lb02-sandbox`     (`mrcnkwcz-k8s-label02`)
 
     ovirt_affinity_groups:
       - name: mrcnkwcz-k8s-group01
