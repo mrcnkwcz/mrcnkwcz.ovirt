@@ -1,5 +1,5 @@
 # Role `mrcnkwcz.ovirt.ovirt_affinity_groups`
-ManAffinity Grouping affinity groups
+Managing affinity groups
 
 ## Vars
 ```yml
