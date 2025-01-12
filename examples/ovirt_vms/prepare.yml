@@ -1,0 +1,14 @@
+- name: Prepare resources
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - files/ovirt_auth.yml
+    - files/ovirt_tags.yml
+    - files/ovirt_affinity.yml
+    - files/ovirt_vms.yml
+  roles:
+    - mrcnkwcz.ovirt.ovirt_tags # noqa: syntax-check[specific]
+    - mrcnkwcz.ovirt.ovirt_affinity_labels # noqa: syntax-check[specific]
+    - mrcnkwcz.ovirt.ovirt_affinity_groups # noqa: syntax-check[specific]
+    - mrcnkwcz.ovirt.ovirt_vms # noqa: syntax-check[specific]

@@ -1,0 +1,32 @@
+---
+ovirt_affinity_labels:
+  - name: nova-master
+    cluster: ''
+  - name: nova-infra
+    cluster: ''
+  - name: nova-lb
+    cluster: ''
+  - name: nova-worker
+    cluster: ''
+
+ovirt_affinity_groups:
+  - name: nova-master
+    cluster: ''
+    vms_labels: nova-master
+    vm_rule: negative
+    vm_enforcing: true
+  - name: nova-infra
+    cluster: ''
+    vms_labels: nova-infra
+    vm_rule: negative
+    vm_enforcing: true
+  - name: nova-lb
+    cluster: ''
+    vms_labels: nova-lb
+    vm_rule: negative
+    vm_enforcing: true
+  - name: nova-worker
+    cluster: ''
+    vms_labels: nova-worker
+    vm_rule: positive
+    vm_enforcing: false

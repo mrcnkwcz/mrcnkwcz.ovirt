@@ -1,0 +1,25 @@
+---
+ovirt_affinity_labels:
+  - name: cloudlink-agent
+    cluster: ''
+  - name: cloudlink-server
+    cluster: ''
+  - name: cloudlink-lb
+    cluster: ''
+
+ovirt_affinity_groups:
+  - name: cloudlink-agent
+    cluster: ''
+    vms_labels: cloudlink-agent
+    vm_rule: negative
+    vm_enforcing: true
+  - name: cloudlink-server
+    cluster: ''
+    vms_labels: cloudlink-server
+    vm_rule: negative
+    vm_enforcing: true
+  - name: cloudlink-lb
+    cluster: ''
+    vms_labels: cloudlink-lb
+    vm_rule: negative
+    vm_enforcing: true

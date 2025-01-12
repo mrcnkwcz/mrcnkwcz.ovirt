@@ -1,0 +1,21 @@
+- name: Absent resources
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - files/ovirt_auth.yml
+    - files/ovirt_tags.yml
+    - files/ovirt_affinity.yml
+    - files/ovirt_vms.yml
+  roles:
+    - mrcnkwcz.ovirt.ovirt_vms # noqa: syntax-check[specific]
+    - mrcnkwcz.ovirt.ovirt_affinity_groups # noqa: syntax-check[specific]
+    - mrcnkwcz.ovirt.ovirt_affinity_labels # noqa: syntax-check[specific]
+    - mrcnkwcz.ovirt.ovirt_tags # noqa: syntax-check[specific]
+  pre_tasks:
+    - name: Setup absent status for all resources
+      ansible.builtin.set_fact:
+        ovirt_tags: "{{ ovirt_tags | map('combine', {'state': 'absent'}) | list }}"
+        ovirt_affinity_groups: "{{ ovirt_affinity_groups | map('combine', {'state': 'absent'}) | list }}"
+        ovirt_affinity_labels: "{{ ovirt_affinity_labels | map('combine', {'state': 'absent'}) | list }}"
+        ovirt_vms: "{{ ovirt_vms | map('combine', {'state': 'absent'}) | list }}"

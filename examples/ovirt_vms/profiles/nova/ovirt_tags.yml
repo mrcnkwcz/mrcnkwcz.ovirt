@@ -1,0 +1,11 @@
+---
+ovirt_tags:
+  - name: nova
+  - name: nova-master
+    parent: nova
+  - name: nova-infra
+    parent: nova
+  - name: nova-worker
+    parent: nova
+  - name: nova-lb
+    parent: nova
