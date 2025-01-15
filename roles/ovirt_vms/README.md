@@ -82,15 +82,15 @@ ovirt_vms:
         size: string                       # Set disk size
         storage_domain: string             # Set storage domain. May inherit from VM storage_domain (true, false)
         wipe_after_delete: boolean         # Set wipe after delete (true, false)
-      graphical_console:                   # Set graphical console
-        copy_paste_enabled: boolean        # Enable copy paste (true, false)
-        disconnect_action: string          # Action after disconnect (none, lock_screen, logout, reboot, shutdown)
-        file_transfer_enabled: boolean     # Enable file transfer for SPICE (true, false)
-        headless_mode: boolean             # Set headless mode
-        keyboard_layout: string            # Set keyboard layout for VNC
-        monitors: integer                  # Numbers of monitor (1, 2, 4)
-        protocol:                          # Set console protocol
-          - string                         # Name of protocol (spice, vnc)
+    graphical_console:                     # Set graphical console
+      copy_paste_enabled: boolean        # Enable copy paste (true, false)
+      disconnect_action: string          # Action after disconnect (none, lock_screen, logout, reboot, shutdown)
+      file_transfer_enabled: boolean     # Enable file transfer for SPICE (true, false)
+      headless_mode: boolean             # Set headless mode
+      keyboard_layout: string            # Set keyboard layout for VNC
+      monitors: integer                  # Numbers of monitor (1, 2, 4)
+      protocol:                          # Set console protocol
+        - string                         # Name of protocol (spice, vnc)
     high_availability: boolean             # Set HA (true, false)
     high_availability_priority: integer    # Set HA priority (0-100)
     host: string                           # Set host for VM running
