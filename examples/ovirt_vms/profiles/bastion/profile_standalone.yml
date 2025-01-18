@@ -1,0 +1,41 @@
+---
+ovirt_vm_profiles:
+  bastion:
+    count: 1
+    cluster: ''
+    template: ''
+    clone: true
+    cpu_sockets: 1
+    cpu_cores: 2
+    cpu_threads: 1
+    memory_max: 8 GiB
+    memory: 4 GiB
+    memory_guaranteed: 4 GiB
+    nics:
+      - name: vnic1
+        network: ''
+    storage_domain: ''
+    disk_format: raw
+    disks:
+      - name: os
+        size: 32 GiB
+        bootable: true
+    lease: ''
+    high_availability: true
+    high_availability_priority: 20
+    affinity_labels:
+      - bastion
+    tags:
+      - bastion
+    cloud_init_persist: true
+    cloud_init:
+      user_name: ''
+      root_password: ''
+      host_name: ''
+      dns_servers: ''
+      authorized_ssh_keys: ''
+      nic_name: ''
+      nic_boot_protocol: ''
+      nic_ip_address: ''
+      nic_netmask: ''
+      nic_gateway: ''

@@ -1,0 +1,9 @@
+---
+ovirt_affinity_labels:
+  - name: bastion
+    cluster: ''
+
+ovirt_affinity_groups:
+  - name: bastion
+    cluster: ''
+    vms_labels: bastion
