@@ -1,0 +1,32 @@
+---
+ovirt_affinity_labels:
+  - name: maas-region-controller
+    cluster: ''
+  - name: maas-rack-controller
+    cluster: ''
+  - name: maas-db
+    cluster: ''
+  - name: maas-proxy
+    cluster: ''
+
+ovirt_affinity_groups:
+  - name: maas-region-controller
+    cluster: ''
+    vms_labels: maas-region-controller
+    vm_rule: negative
+    vm_enforcing: true
+  - name: maas-rack-controller
+    cluster: ''
+    vms_labels: maas-rack-controller
+    vm_rule: negative
+    vm_enforcing: true
+  - name: maas-db
+    cluster: ''
+    vms_labels: maas-db
+    vm_rule: negative
+    vm_enforcing: true
+  - name: maas-proxy
+    cluster: ''
+    vms_labels: maas-proxy
+    vm_rule: negative
+    vm_enforcing: false

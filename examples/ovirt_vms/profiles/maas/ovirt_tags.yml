@@ -1,0 +1,11 @@
+---
+ovirt_tags:
+  - name: maas
+  - name: maas-region-controller
+    parent: maas
+  - name: maas-rack-controller
+    parent: maas
+  - name: maas-db
+    parent: maas
+  - name: maas-proxy
+    parent: maas
