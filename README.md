@@ -19,6 +19,9 @@ Collection for oVirt environments
 * [ovirt_group_by_affinity_labels](plugins/filter/ovirt_group_by_affinity_labels.yml)
 * [ovirt_group_by_tags](plugins/filter/ovirt_group_by_tags.yml)
 
+## Examples
+Examples of using roles can be found [here](examples)
+
 ## Install requirements
 ### Local
 ```bash
