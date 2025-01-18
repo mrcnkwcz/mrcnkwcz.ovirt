@@ -1,0 +1,3 @@
+export OVIRT_HOSTNAME=''
+export OVIRT_USERNAME=''
+export OVIRT_PASSWORD=''
