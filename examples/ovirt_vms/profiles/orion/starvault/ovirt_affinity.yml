@@ -1,0 +1,18 @@
+---
+ovirt_affinity_labels:
+  - name: starvault-server
+    cluster: ''
+  - name: starvault-consul
+    cluster: ''
+
+ovirt_affinity_groups:
+  - name: starvault-server
+    cluster: ''
+    vms_labels: starvault-server
+    vm_rule: negative
+    vm_enforcing: true
+  - name: starvault-consul
+    cluster: ''
+    vms_labels: starvault-consul
+    vm_rule: negative
+    vm_enforcing: true

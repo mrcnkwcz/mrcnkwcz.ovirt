@@ -1,0 +1,7 @@
+---
+ovirt_tags:
+  - name: starvault
+  - name: starvault-server
+    parent: starvault
+  - name: starvault-consul
+    parent: starvault

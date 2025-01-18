@@ -28,5 +28,5 @@ ovirt_affinity_groups:
   - name: nova-worker
     cluster: ''
     vms_labels: nova-worker
-    vm_rule: positive
+    vm_rule: negative
     vm_enforcing: false

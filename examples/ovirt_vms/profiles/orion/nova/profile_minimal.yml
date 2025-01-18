@@ -1,7 +1,7 @@
 ---
 ovirt_vm_profiles:
   nova-worker:
-    count: 2
+    count: 1
     cluster: ''
     template: ''
     clone: true
@@ -40,16 +40,16 @@ ovirt_vm_profiles:
       nic_netmask: ''
       nic_gateway: ''
   nova-infra:
-    count: 3
+    count: 1
     cluster: ''
     template: ''
     clone: true
     cpu_sockets: 1
-    cpu_cores: 6
+    cpu_cores: 8
     cpu_threads: 1
-    memory_max: 24 GiB
-    memory: 12 GiB
-    memory_guaranteed: 12 GiB
+    memory_max: 32 GiB
+    memory: 16 GiB
+    memory_guaranteed: 16 GiB
     nics:
       - name: vnic1
         network: ''
@@ -79,7 +79,7 @@ ovirt_vm_profiles:
       nic_netmask: ''
       nic_gateway: ''
   nova-master:
-    count: 3
+    count: 1
     cluster: ''
     template: ''
     clone: true
@@ -105,45 +105,6 @@ ovirt_vm_profiles:
       - nova-master
     tags:
       - nova-master
-    cloud_init_persist: true
-    cloud_init:
-      user_name: ''
-      root_password: ''
-      host_name: ''
-      dns_servers: ''
-      authorized_ssh_keys: ''
-      nic_name: ''
-      nic_boot_protocol: ''
-      nic_ip_address: ''
-      nic_netmask: ''
-      nic_gateway: ''
-  nova-lb:
-    count: 3
-    cluster: ''
-    template: ''
-    clone: true
-    cpu_sockets: 1
-    cpu_cores: 2
-    cpu_threads: 1
-    memory_max: 8 GiB
-    memory: 4 GiB
-    memory_guaranteed: 4 GiB
-    nics:
-      - name: vnic1
-        network: ''
-    storage_domain: ''
-    disk_format: raw
-    disks:
-      - name: os
-        size: 32 GiB
-        bootable: true
-    lease: ''
-    high_availability: true
-    high_availability_priority: 20
-    affinity_labels:
-      - nova-lb
-    tags:
-      - nova-lb
     cloud_init_persist: true
     cloud_init:
       user_name: ''

@@ -1,8 +1,6 @@
 ---
 ovirt_tags:
   - name: cloudlink
-  - name: cloudlink-manager
-    parent: cloudlink
   - name: cloudlink-server
     parent: cloudlink
   - name: cloudlink-agent

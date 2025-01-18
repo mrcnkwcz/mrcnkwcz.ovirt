@@ -1,0 +1,7 @@
+---
+ovirt_tags:
+  - name: proximadb
+  - name: proximadb-server
+    parent: proximadb
+  - name: proximadb-arbiter
+    parent: proximadb

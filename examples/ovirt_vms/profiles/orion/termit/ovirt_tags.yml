@@ -1,0 +1,11 @@
+---
+ovirt_tags:
+  - name: termit
+  - name: termit-gw
+    parent: termit
+  - name: termit-lb
+    parent: termit
+  - name: termit-br
+    parent: termit
+  - name: termit-db
+    parent: termit

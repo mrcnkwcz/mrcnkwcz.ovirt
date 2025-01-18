@@ -1,0 +1,32 @@
+---
+ovirt_affinity_labels:
+  - name: termit-gw
+    cluster: ''
+  - name: termit-lb
+    cluster: ''
+  - name: termit-br
+    cluster: ''
+  - name: termit-db
+    cluster: ''
+
+ovirt_affinity_groups:
+  - name: termit-gw
+    cluster: ''
+    vms_labels: termit-gw
+    vm_rule: negative
+    vm_enforcing: true
+  - name: termit-lb
+    cluster: ''
+    vms_labels: termit-lb
+    vm_rule: negative
+    vm_enforcing: true
+  - name: termit-br
+    cluster: ''
+    vms_labels: termit-br
+    vm_rule: negative
+    vm_enforcing: true
+  - name: termit-db
+    cluster: ''
+    vms_labels: termit-db
+    vm_rule: negative
+    vm_enforcing: true

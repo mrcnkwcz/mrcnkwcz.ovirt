@@ -1,6 +1,0 @@
----
-ovirt_auth_hostname: ''
-ovirt_auth_username: ''
-ovirt_auth_password: ''
-ovirt_auth_insecure: false
-ovirt_auth_ca_file: ~/ca.crt
